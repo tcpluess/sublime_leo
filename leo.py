@@ -5,16 +5,22 @@ import webbrowser
 
 class LeoCommand(sublime_plugin.TextCommand):
   def is_enabled(self):
-    view = sublime.active_window().active_view()
-    return view.has_non_empty_selection_region()
+    return True
 
   def doit(self, url):
-    view = sublime.active_window().active_view()
-    sel = view.sel()
-    region1 = sel[0]
-    selectionText = view.substr(region1)
-    url = url + selectionText
-    webbrowser.open(url)
+    for region in self.view.sel():
+      if region.begin() == region.end():
+        word = self.view.word(region)
+      else:
+        word = region
+      if not word.empty():
+        keyword = self.view.substr(word)
+        view = sublime.active_window().active_view()
+        sel = view.sel()
+        region1 = sel[0]
+        selectionText = view.substr(region1)
+        url = url + keyword
+        webbrowser.open(url)
 
 
 class LeoEnDeCommand(LeoCommand):
