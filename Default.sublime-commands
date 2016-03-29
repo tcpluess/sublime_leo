@@ -1,0 +1,10 @@
+[
+  {
+    "caption": "LEO: En -> De",
+    "command": "leo_en_de"
+  },
+  {
+    "caption": "LEO: De -> En",
+    "command": "leo_de_en"
+  },
+]
